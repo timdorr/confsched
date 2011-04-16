@@ -1,0 +1,7 @@
+var/cache/*php
+app/Config.php
+app/controllers/*php
+app/model/*/
+app/views/*/
+.DS_Store
+
