@@ -7,6 +7,17 @@ Speed is the primary focus of the project, both when it comes to runtime executi
 
 Formerly known as ASOworx.
 
+Installation
+------------
+
+To avoid a troublesome setup process and issues with stepping on existing files in git, we've broken colony into two repositories: colony and colony-scaffold. The core library code is in the first repository; the scaffolding required for an application to run is in the second. It is recommended when starting a new project based on colony, that you check out the scaffolding code to base your project on. This will set up the library as a git submodule, which you can update independently from your application code as new code is made available. Simply run the following:
+
+	git clone git@github.com:armyofbees/colony-scaffold.git .
+	git submodule init
+	git submodule update
+
+You will now have your application scaffolding ready to customize for your particular app. If colony is updated and you wish to use that update in your application, you can update with "git submodule update". Read the full git-submodule(1) documentation for full details on how submodules work and to get some idea of the tricks you can do with them.
+
 License
 -------
 
