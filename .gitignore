@@ -1,7 +1,7 @@
 var/cache/*php
 app/Config.php
-app/controllers/*php
-app/model/*/
-app/views/*/
+app/build.properties
+app/runtime-conf.xml
+app/model/conf/colony-conf.php
 .DS_Store
 
