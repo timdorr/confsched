@@ -1,6 +1,6 @@
 body {
     background: #fff url(/static/image/background.jpg) repeat;
-    font-family: ProximaNova, Arial, sans-serif;
+    font-family: ProximaNova, Verdana, Arial, sans-serif;
 }
 
 a {
@@ -27,6 +27,7 @@ a {
             color: #fff;
             font-size: 20px;
             text-shadow: 0 1px 1px #000;
+            text-shadow: 0 1px 1px rgba(0,0,0,0.66);
         }
         
         #beheader a.home:before {
@@ -44,3 +45,107 @@ a {
             background: transparent url(/static/image/schedule.png) no-repeat;
             color: transparent;
         }
+        
+    #contents { 
+        position: relative;
+        overflow: hidden;
+        width: 990px;
+        margin: 20px auto;
+        background: #fff;
+        border: 1px solid #b9bec0;
+        -webkit-border-radius: 10px;
+        -moz-border-radius: 10px;
+        border-radius: 10px;
+        -webkit-box-shadow: 0px 10px 20px rgba(0,0,0,0.1);
+        -moz-box-shadow: 0px 10px 20px rgba(0,0,0,0.1);
+        box-shadow: 0px 10px 20px rgba(0,0,0,0.1); 
+    }
+    
+        #sidecalendar {
+            float: left;
+            width: 350px;
+        }
+        
+        #sideagenda {
+            float: left;
+            width: 640px;
+        }
+        
+        .sideheader {
+            position: relative;
+            height: 15px;
+            padding: 13px;
+            background: transparent url(/static/image/sideheader.png) repeat-x top left;
+            color: #567;
+            font-size: 13px;
+            font-weight: bold;
+            text-shadow: 0 1px 0 #fff;
+        }
+        
+            .sideheader:before {
+                content: url(/static/image/sideheader.notch.png);
+                position: absolute;
+                left: 30px;
+                bottom: -7px;
+            }
+        
+            /* I *really* hate how Webkit handles borders. It borderlines (pun intended!) on being completely broken. */
+        
+            #sidecalendar .sideheader {                
+                -webkit-border-top-left-radius: 10px;
+                -moz-border-radius-topleft: 10px;
+                border-top-left-radius: 10px;
+            }
+        
+            #sideagenda .sideheader {                
+                -webkit-border-top-right-radius: 10px;
+                -moz-border-radius-topright: 10px;
+                border-top-right-radius: 10px;
+            }
+            
+        .calendar {
+            width: 300px;
+            margin: 20px auto;
+        }
+        
+            .calendar .title {
+                font-size: 14px;
+                font-style: italic;
+                text-align: center;
+            }
+            
+            .calendar table {
+                margin: 0 auto;
+                border-collapse: separate;
+                border-spacing: 5px;
+            }
+            
+                .calendar td {
+                    padding: 5px;
+                    width: 30px;
+                    height: 30px;
+                    background: #f3f7f8;
+                    font-size: 10px;
+                    border: 1px solid #b2c3ca;
+                    -webkit-border-radius: 2px;
+                    -moz-border-radius: 2px;
+                    border-radius: 2px;
+                    -webkit-transition: all 0.1s ease-in-out;
+                	-moz-transition:    all 0.1s ease-in-out;
+                	-o-transition:      all 0.1s ease-in-out;
+                	-ms-transition:     all 0.1s ease-in-out;
+                	transition:         all 0.1s ease-in-out;
+                }
+                
+                    .calendar td:hover {
+                        background: #f9feff;
+                    }
+                    
+                    .calendar td.today {
+                        background: #f6f3e8;
+                        border: 1px solid #cac4b2;
+                    }
+                    
+                    .calendar td img {
+                        float: right;
+                    }

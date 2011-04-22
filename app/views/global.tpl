@@ -24,8 +24,12 @@
         
         </div>
 
-        {include file=$templatefile}
-    
+        <div id="contents">
+
+            {include file=$templatefile}
+
+        </div>
+
     </div>
 
 </body>
