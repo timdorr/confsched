@@ -9,7 +9,7 @@
         <table>
             <tr>
             {foreach from=$day_array item=day key=key}
-                <td{if $day.today} class="today"{/if}>
+                <td class="{if $day.today}today{/if} {if $day.month != $month_num}other{/if}">
                     {$day.day}
                     {if $day.occupied}<img src="/static/image/dot.png">{/if}
                 </td>

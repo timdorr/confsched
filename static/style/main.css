@@ -141,9 +141,18 @@ a {
                         background: #f9feff;
                     }
                     
+                    .calendar td.other {
+                        background: #f4f4f4;
+                        border: 1px solid #ddd;
+                    }
+                    
                     .calendar td.today {
                         background: #f6f3e8;
                         border: 1px solid #cac4b2;
+                    }
+                    
+                    .calendar td.today:hover {
+                        background: #fbf9f3;
                     }
                     
                     .calendar td img {
