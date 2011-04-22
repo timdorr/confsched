@@ -1,0 +1,46 @@
+body {
+    background: #fff url(/static/image/background.jpg) repeat;
+    font-family: ProximaNova, Arial, sans-serif;
+}
+
+a {
+    color: #135a88;
+    text-decoration: none;
+}
+
+#thatsawrap {
+    width: 1000px;
+    margin: 0 auto;
+}
+
+    #beheader {
+        position: relative;
+        width: 1000px;
+        height: 50px;
+        background: transparent url(/static/image/header.png) no-repeat top center;
+        font-weight: bold;
+    }
+    
+        #beheader a.home {
+            display: block;
+            padding: 12px 30px;
+            color: #fff;
+            font-size: 20px;
+            text-shadow: 0 1px 1px #000;
+        }
+        
+        #beheader a.home:before {
+            content: url(/static/image/home.png);
+            margin-right: 5px;
+            vertical-align: middle;
+        }
+        
+        #beheader a.add {
+            position: absolute;
+            top: 10px;
+            right: 30px;
+            width: 152px;
+            height: 28px;
+            background: transparent url(/static/image/schedule.png) no-repeat;
+            color: transparent;
+        }
