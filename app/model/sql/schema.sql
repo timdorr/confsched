@@ -19,5 +19,25 @@ CREATE TABLE `session`
 	PRIMARY KEY (`id`)
 ) ENGINE=MyISAM;
 
+#-----------------------------------------------------------------------------
+#-- event
+#-----------------------------------------------------------------------------
+
+DROP TABLE IF EXISTS `event`;
+
+
+CREATE TABLE `event`
+(
+	`title` VARCHAR(255)  NOT NULL,
+	`description` TEXT  NOT NULL,
+	`hidetitle` TINYINT default 0 NOT NULL,
+	`start` DATETIME  NOT NULL,
+	`end` DATETIME  NOT NULL,
+	`id` INTEGER  NOT NULL AUTO_INCREMENT,
+	`created_at` DATETIME,
+	`updated_at` DATETIME,
+	PRIMARY KEY (`id`)
+) ENGINE=MyISAM;
+
 # This restores the fkey checks, after having unset them earlier
 SET FOREIGN_KEY_CHECKS = 1;
