@@ -30,4 +30,15 @@
     <div class="sideheader">
         On The Agenda
     </div>
+    
+    <div id="agenda">
+        {foreach from=$agenda item=event}
+        <div class="event">
+            <h3>{$event->getTitle()}</h3>
+            <h6>{$event->getStart('F j g:i a')} - {$event->getEnd('g:i a')}</h6>
+            {if $event->getDescription()}<p>{$event->getDescription()}</p>{/if}
+        </div>
+        {/foreach}
+    </div>
+    
 </div>

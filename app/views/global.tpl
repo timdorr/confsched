@@ -15,6 +15,9 @@
 </head>
 <body>
 
+    <div id="addbox"></div>
+    <div id="blackout"></div>
+
     <div id="thatsawrap">
     
         <div id="beheader">
@@ -31,6 +34,23 @@
         </div>
 
     </div>
+    
+    
+
+<script type="text/javascript">
+$('#beheader .add').click(function(e){
+    $('#thatsawrap').css({ top: -540 });
+    $('#blackout').fadeIn();
+    $('#addbox').fadeIn().load('/add');
+    e.preventDefault();
+});
+
+$('#blackout').click(function(e){
+    $('#blackout').fadeOut('normal',function(){ $('#thatsawrap').css({ top: 0 }); });
+    $('#addbox').fadeOut();
+    e.preventDefault();
+});
+</script>
 
 </body>
 </html>

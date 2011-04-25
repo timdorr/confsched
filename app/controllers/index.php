@@ -31,7 +31,7 @@ class Index_Controller extends App_Controller
         
         $event_dates = array();
         foreach( $events as $event ) {
-            $event_dates[] = date( 'n-j-Y', strtotime( $event->getStart() ) );
+            $event_dates[] = date( 'n-j-Y', strtotime( $event->getStart() . ' +1 day' ) );
         }
         
         // Create an array of the days on the calendar
@@ -39,21 +39,25 @@ class Index_Controller extends App_Controller
         $cycles = 0;
         for( $i = 1 - $start_dow; $i < $thismonth_days || $cycles % 7 != 0; $i++ ) {
             $cycles++;
-            
+
             if( $i < 1 ) {
                 $this->day_array[] = array( 'month' => date( 'n', strtotime( '-1 month', $start_day ) ), 
                                             'day' => $lastmonth_days + $i, 
-                                            'occupied' => in_array( date( 'n-j-Y', strtotime( "+$i days", $start_day ) ), $event_dates ) );
+                                            'occupied' => in_array( date( 'n-j-Y', strtotime( "+".($i)." days", $start_day ) ), $event_dates ) );
             } elseif( $i > $thismonth_days ) {
                 $this->day_array[] = array( 'month' => date( 'n', strtotime( '+1 month', $start_day ) ), 
                                             'day' => $i - $thismonth_days, 
-                                            'occupied' => in_array( date( 'n-j-Y', strtotime( "+$i days", $start_day ) ), $event_dates ) );
+                                            'occupied' => in_array( date( 'n-j-Y', strtotime( "+".($i)." days", $start_day ) ), $event_dates ) );
             } else {
                 $this->day_array[] = array( 'month' => $this->month_num, 'day' => $i, 
                                             'today' => ( $i == date( 'j' ) ) ? true : false, 
-                                            'occupied' => in_array( date( 'n-j-Y', strtotime( "+$i days", $start_day ) ), $event_dates ) );
+                                            'occupied' => in_array( date( 'n-j-Y', strtotime( "+".($i)." days", $start_day ) ), $event_dates ) );
             }
         }
+    }
+
+    public function add() {
+        $this->noglobal = true;
     }
 
 }
