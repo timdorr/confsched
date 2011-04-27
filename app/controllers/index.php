@@ -145,6 +145,21 @@ class Index_Controller extends App_Controller
         } else
             $this->jaysawn = json_encode( array( 'message' => '<img src="/static/image/error.png"> Email address not found', 'status' => 0 ) );
     }
+    
+    public function confirm() {
+        // Find the event via the key and make sure it's valid
+        $this->event = EventQuery::create()->findOneByKey( $this->input['key'] );
+        if( !$this->event )
+            exit();
+        
+        // If we're POSTing    
+        if( strncasecmp( $_SERVER['REQUEST_METHOD'], "POST", 4 ) == 0 ) {
+            $this->event->setKey( '' );
+            $this->event->save();
+            
+            $this->redirect( '' );
+        }
+    }
 
 
     private function fb_request( $method, $data = array() ) {

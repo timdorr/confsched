@@ -46,7 +46,6 @@ $('#beheader .add').click(function(e){
     $('#addbox').fadeIn().load('/add',function(){ $( ".datepicker" ).datepicker(); $( ".timepicker" ).calendricalTimeRange({ padding: 10 }); });
     e.preventDefault();
 });
-$('#beheader .add').click();
 
 function closeAddBox(e) {
     $('#blackout').fadeOut('normal',function(){ $('#thatsawrap').css({ top: 0 }); });

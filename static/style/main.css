@@ -190,6 +190,11 @@ a {
                         font-style: italic;
                     }
                 
+                .event h5 {
+                    font-size: 14px;
+                    font-style: italic;
+                }
+                
                 .event h6 {
                     color: #666;
                     font-size: 13px;
@@ -333,3 +338,17 @@ a {
             #errorbox ul li {
                 padding: 3px;
             }
+            
+#confirm {
+    padding: 20px;
+}
+
+    #confirm h2 {
+        margin-bottom: 10px;
+        font-size: 20px;
+        font-weight: bold;
+    }
+    
+    #confirm input {
+        margin-top: 10px;
+    }
