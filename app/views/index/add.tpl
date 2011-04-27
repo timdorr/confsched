@@ -21,7 +21,8 @@
     </div>
     
     <div class="checkbox">
-        <input type="checkbox" name="public"> Open to the public    
+        <input type="hidden" name="public" value="0">
+        <input type="checkbox" name="public" value="1"> Open to the public    
     </div>
 
     <div>

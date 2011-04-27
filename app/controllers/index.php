@@ -11,6 +11,7 @@ class Index_Controller extends App_Controller
         // Get some data from the database for agenda
         $this->agenda = EventQuery::create()
                         ->filterByStart( strtotime('-14 days') , Criteria::GREATER_THAN )
+                        ->filterByKey( '' )
                         ->orderByStart()
                         ->find();
         
@@ -88,7 +89,7 @@ class Index_Controller extends App_Controller
                 $errors[] = "The time and/or date isn't formatted correctly";
             
             // Swap the times if they're backwards
-            if( $end > $start ) {
+            if( $end < $start ) {
                 $t = $end;
                 $end = $start;
                 $start = $t;
@@ -100,8 +101,25 @@ class Index_Controller extends App_Controller
             
             // If there are no errors, success!
             if( count( $errors ) == 0 ) {
+                // Create the event
+                $event = new Event();
+                
+                $event->setTitle( $this->input['title'] );
+                $event->setDescription( $this->input['description'] );
+                $event->setIspublic( $this->input['public'] );
+                
+                $event->setStart( $start );
+                $event->setEnd( $end );
+                
+                $event->setEmail( $this->input['email'] );
+                $event->setKey( sha1( time() + rand() ) );
+            
+                $event->save();
+            
+                // Prepare the response
                 $this->jaysawn = json_encode( array( 'message' => '<h2>Thanks for adding your event!</h2><p>You will get an email with a link to activate the listing. Please be sure to click that link or your event will not show up and your time will not be reserved!</p><input type="submit" id="closebox" value="Back to the calendar">', status => 0 ) );
             } else {
+                // Prepare the error list
                 $message = '<p>You had the following errors:</p><ul>';
                 foreach( $errors as $e )
                     $message .= "<li>$e</li>";
