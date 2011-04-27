@@ -33,6 +33,8 @@ CREATE TABLE `event`
 	`ispublic` TINYINT default 0 NOT NULL,
 	`start` DATETIME  NOT NULL,
 	`end` DATETIME  NOT NULL,
+	`email` VARCHAR(255)  NOT NULL,
+	`key` VARCHAR(255)  NOT NULL,
 	`id` INTEGER  NOT NULL AUTO_INCREMENT,
 	`created_at` DATETIME,
 	`updated_at` DATETIME,

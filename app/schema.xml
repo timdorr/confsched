@@ -12,6 +12,8 @@
         <column name="ispublic" type="tinyint" defaultValue="0" required="true" />
         <column name="start" type="timestamp" required="true" />
         <column name="end" type="timestamp" required="true" />
+        <column name="email" type="varchar" required="true" />
+        <column name="key" type="varchar" required="true" />
         <behavior name="auto_add_pk" />
         <behavior name="timestampable" />
     </table>

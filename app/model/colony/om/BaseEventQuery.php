@@ -11,6 +11,8 @@
  * @method     EventQuery orderByIspublic($order = Criteria::ASC) Order by the ispublic column
  * @method     EventQuery orderByStart($order = Criteria::ASC) Order by the start column
  * @method     EventQuery orderByEnd($order = Criteria::ASC) Order by the end column
+ * @method     EventQuery orderByEmail($order = Criteria::ASC) Order by the email column
+ * @method     EventQuery orderByKey($order = Criteria::ASC) Order by the key column
  * @method     EventQuery orderById($order = Criteria::ASC) Order by the id column
  * @method     EventQuery orderByCreatedAt($order = Criteria::ASC) Order by the created_at column
  * @method     EventQuery orderByUpdatedAt($order = Criteria::ASC) Order by the updated_at column
@@ -20,6 +22,8 @@
  * @method     EventQuery groupByIspublic() Group by the ispublic column
  * @method     EventQuery groupByStart() Group by the start column
  * @method     EventQuery groupByEnd() Group by the end column
+ * @method     EventQuery groupByEmail() Group by the email column
+ * @method     EventQuery groupByKey() Group by the key column
  * @method     EventQuery groupById() Group by the id column
  * @method     EventQuery groupByCreatedAt() Group by the created_at column
  * @method     EventQuery groupByUpdatedAt() Group by the updated_at column
@@ -36,6 +40,8 @@
  * @method     Event findOneByIspublic(int $ispublic) Return the first Event filtered by the ispublic column
  * @method     Event findOneByStart(string $start) Return the first Event filtered by the start column
  * @method     Event findOneByEnd(string $end) Return the first Event filtered by the end column
+ * @method     Event findOneByEmail(string $email) Return the first Event filtered by the email column
+ * @method     Event findOneByKey(string $key) Return the first Event filtered by the key column
  * @method     Event findOneById(int $id) Return the first Event filtered by the id column
  * @method     Event findOneByCreatedAt(string $created_at) Return the first Event filtered by the created_at column
  * @method     Event findOneByUpdatedAt(string $updated_at) Return the first Event filtered by the updated_at column
@@ -45,6 +51,8 @@
  * @method     array findByIspublic(int $ispublic) Return Event objects filtered by the ispublic column
  * @method     array findByStart(string $start) Return Event objects filtered by the start column
  * @method     array findByEnd(string $end) Return Event objects filtered by the end column
+ * @method     array findByEmail(string $email) Return Event objects filtered by the email column
+ * @method     array findByKey(string $key) Return Event objects filtered by the key column
  * @method     array findById(int $id) Return Event objects filtered by the id column
  * @method     array findByCreatedAt(string $created_at) Return Event objects filtered by the created_at column
  * @method     array findByUpdatedAt(string $updated_at) Return Event objects filtered by the updated_at column
@@ -292,6 +300,50 @@ abstract class BaseEventQuery extends ModelCriteria
 			}
 		}
 		return $this->addUsingAlias(EventPeer::END, $end, $comparison);
+	}
+
+	/**
+	 * Filter the query on the email column
+	 * 
+	 * @param     string $email The value to use as filter.
+	 *            Accepts wildcards (* and % trigger a LIKE)
+	 * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+	 *
+	 * @return    EventQuery The current query, for fluid interface
+	 */
+	public function filterByEmail($email = null, $comparison = null)
+	{
+		if (null === $comparison) {
+			if (is_array($email)) {
+				$comparison = Criteria::IN;
+			} elseif (preg_match('/[\%\*]/', $email)) {
+				$email = str_replace('*', '%', $email);
+				$comparison = Criteria::LIKE;
+			}
+		}
+		return $this->addUsingAlias(EventPeer::EMAIL, $email, $comparison);
+	}
+
+	/**
+	 * Filter the query on the key column
+	 * 
+	 * @param     string $key The value to use as filter.
+	 *            Accepts wildcards (* and % trigger a LIKE)
+	 * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+	 *
+	 * @return    EventQuery The current query, for fluid interface
+	 */
+	public function filterByKey($key = null, $comparison = null)
+	{
+		if (null === $comparison) {
+			if (is_array($key)) {
+				$comparison = Criteria::IN;
+			} elseif (preg_match('/[\%\*]/', $key)) {
+				$key = str_replace('*', '%', $key);
+				$comparison = Criteria::LIKE;
+			}
+		}
+		return $this->addUsingAlias(EventPeer::KEY, $key, $comparison);
 	}
 
 	/**

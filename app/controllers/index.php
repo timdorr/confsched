@@ -1,6 +1,7 @@
 <?php
 
 require_once 'AppController.php';
+require_once 'HTTP/Request.php';
 
 class Index_Controller extends App_Controller
 {
@@ -59,10 +60,103 @@ class Index_Controller extends App_Controller
 
     public function add() {
         $this->noglobal = true;
+        $this->result = 0;
+        
+        // If we're submitting
+        if( $this->input['email'] ) {
+            $this->result = 1;
+            
+            // Error checking
+            $errors = array();
+            
+            // Empty checks
+            if( empty( $this->input['title'] ) )
+                $errors[] = 'The event must have a title';
+            
+            if( empty( $this->input['date'] ) )
+                $errors[] = 'The event must have a date';
+            
+            if( empty( $this->input['start'] ) || empty( $this->input['end'] ) )
+                $errors[] = 'The event must have a time';
+                
+            // Save the start and end time for later
+            $start = strtotime( $this->input['date'] . ' ' . $this->input['start'] );
+            $end = strtotime( $this->input['date'] . ' ' . $this->input['end'] );
+            
+            // Check that formatting was correct
+            if( $start == 0 || $end == 0 )
+                $errors[] = "The time and/or date isn't formatted correctly";
+            
+            // Swap the times if they're backwards
+            if( $end > $start ) {
+                $t = $end;
+                $end = $start;
+                $start = $t;
+            }
+            
+            // Can't be in the past.
+            if( $start < time() )
+                $errors[] = "The event can't be in the past";
+            
+            // If there are no errors, success!
+            if( count( $errors ) == 0 ) {
+                $this->jaysawn = json_encode( array( 'message' => '<h2>Thanks for adding your event!</h2><p>You will get an email with a link to activate the listing. Please be sure to click that link or your event will not show up and your time will not be reserved!</p><input type="submit" id="closebox" value="Back to the calendar">', status => 0 ) );
+            } else {
+                $message = '<p>You had the following errors:</p><ul>';
+                foreach( $errors as $e )
+                    $message .= "<li>$e</li>";
+                $message .= '</ul>';
+                
+                $this->jaysawn = json_encode( array( 'message' => $message, status => 1 ) );
+            }
+        }
     }
 
     public function checkemail() {
-        $this->noglobal = true;    
+        $this->noglobal = true; 
+        
+        // First, find them in the active client list
+        $client = $this->fb_request( 'client.list', array( 'email' => $this->input['email'] ) );
+        if( $client && $client->clients->client ) {
+            // Next, find if they've got an active membership
+            $profile = $this->fb_request( 'recurring.list', array( 'client_id' => $client->clients->client->client_id ) );
+            if( $profile && $profile->recurrings->recurring && $profile->recurrings->recurring->stopped == 0 )
+                $this->jaysawn = json_encode( array( 'message' => "<img src='/static/image/success.png'> You're a member! Yay!", 'status' => 1 ) );
+            else
+                $this->jaysawn = json_encode( array( 'message' => '<img src="/static/image/error.png"> You are not an active member', 'status' => 0 ) );
+        } else
+            $this->jaysawn = json_encode( array( 'message' => '<img src="/static/image/error.png"> Email address not found', 'status' => 0 ) );
     }
+
+
+    private function fb_request( $method, $data = array() ) {
+        $fb_url = 'https://ignitionalley.freshbooks.com/api/2.1/xml-in';
+        $fb_tok = '2a16ae2359fba460612fbe22bb8e8166';
+        
+        $req =& new HTTP_Request( $fb_url );
+        $req->setBasicAuth( $fb_tok, 'X' );
+        $req->setMethod(HTTP_REQUEST_METHOD_POST);
+        $req->setBody( "<?xml version='1.0' encoding='utf-8'?><request method='$method'>".$this->fb_build_request($data)."</request>" );
+        
+        if (!PEAR::isError($req->sendRequest())) {
+            $xml = simplexml_load_string( $req->getResponseBody() );
+            return $xml;
+        }
+        else
+             return false;
+    }
+    
+    private function fb_build_request( $data ) {
+    $ret = '';
+    foreach( $data as $key => $val ) {
+        $ret .= "<$key>";
+        if( is_array($val ) )
+            $ret .= fb_build_request( $val );
+        else
+            $ret .= $val;
+        $ret .= "</$key>";
+    }
+    return $ret;
+}
 
 }

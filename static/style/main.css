@@ -261,6 +261,11 @@ a {
         font-size: 20px;
         font-weight: bold;
     }
+            
+    #addbox p {
+        margin: 10px 0;
+        line-height: 22px;
+    }
     
     #addbox fieldset {
         margin: 10px 0;
@@ -280,6 +285,18 @@ a {
         padding-left: 10px;
         font-size: 14px;
     }
+        
+        .success#emailcheck {
+            color: #0d6918;
+        }
+        
+        .error#emailcheck {
+            color: #7f1616;
+        }
+        
+        #addbox #emailcheck img {
+            vertical-align: text-top;
+        }
     
     #addbox .checkbox {
         margin: 5px 0 10px;
@@ -288,3 +305,31 @@ a {
         #addbox .checkbox input {
             margin: 0 5px 0 0;
         }
+        
+    #addbox #errorbox {
+        display: none;
+        position: absolute;
+        top: 149px;
+        right: 25px;
+        width: 300px;
+        padding: 10px;
+        background: #f2dfdf;
+        color: #390808;
+        border: 1px solid #e48383;
+    	-moz-opacity: 0.7;
+    	opacity: .7;
+    	filter: alpha(opacity=7);
+    }
+        #errorbox p {
+            margin: 0;
+            margin-bottom: 5px;
+        }
+    
+        #errorbox ul {
+            list-style: disc;
+            margin-left: 20px;
+        }
+        
+            #errorbox ul li {
+                padding: 3px;
+            }

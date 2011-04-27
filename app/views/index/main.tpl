@@ -34,8 +34,11 @@
     <div id="agenda">
         {$prevstart=0}
         {foreach from=$agenda item=event}
+        {if $prevstart == 0 && $event->getStart('U') < time()}
+        <div class="nowhr"><span>Recent Events</span></div>
+        {/if}
         {if $prevstart < time() && $event->getStart('U') > time()}
-        <div class="nowhr"><span>Right Now</span></div>
+        <div class="nowhr"><span>Upcoming</span></div>
         {/if}
         <div class="event{if $event->getStart('U') < time()} old{/if}">
             <h3{if $event->getIspublic() == 0} class="private"{/if}>{$event->getTitle()}</h3>

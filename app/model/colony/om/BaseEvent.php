@@ -56,6 +56,18 @@ abstract class BaseEvent extends BaseObject  implements Persistent
 	protected $end;
 
 	/**
+	 * The value for the email field.
+	 * @var        string
+	 */
+	protected $email;
+
+	/**
+	 * The value for the key field.
+	 * @var        string
+	 */
+	protected $key;
+
+	/**
 	 * The value for the id field.
 	 * @var        int
 	 */
@@ -212,6 +224,26 @@ abstract class BaseEvent extends BaseObject  implements Persistent
 		} else {
 			return $dt->format($format);
 		}
+	}
+
+	/**
+	 * Get the [email] column value.
+	 * 
+	 * @return     string
+	 */
+	public function getEmail()
+	{
+		return $this->email;
+	}
+
+	/**
+	 * Get the [key] column value.
+	 * 
+	 * @return     string
+	 */
+	public function getKey()
+	{
+		return $this->key;
 	}
 
 	/**
@@ -459,6 +491,46 @@ abstract class BaseEvent extends BaseObject  implements Persistent
 	} // setEnd()
 
 	/**
+	 * Set the value of [email] column.
+	 * 
+	 * @param      string $v new value
+	 * @return     Event The current object (for fluent API support)
+	 */
+	public function setEmail($v)
+	{
+		if ($v !== null) {
+			$v = (string) $v;
+		}
+
+		if ($this->email !== $v) {
+			$this->email = $v;
+			$this->modifiedColumns[] = EventPeer::EMAIL;
+		}
+
+		return $this;
+	} // setEmail()
+
+	/**
+	 * Set the value of [key] column.
+	 * 
+	 * @param      string $v new value
+	 * @return     Event The current object (for fluent API support)
+	 */
+	public function setKey($v)
+	{
+		if ($v !== null) {
+			$v = (string) $v;
+		}
+
+		if ($this->key !== $v) {
+			$this->key = $v;
+			$this->modifiedColumns[] = EventPeer::KEY;
+		}
+
+		return $this;
+	} // setKey()
+
+	/**
 	 * Set the value of [id] column.
 	 * 
 	 * @param      int $v new value
@@ -617,9 +689,11 @@ abstract class BaseEvent extends BaseObject  implements Persistent
 			$this->ispublic = ($row[$startcol + 2] !== null) ? (int) $row[$startcol + 2] : null;
 			$this->start = ($row[$startcol + 3] !== null) ? (string) $row[$startcol + 3] : null;
 			$this->end = ($row[$startcol + 4] !== null) ? (string) $row[$startcol + 4] : null;
-			$this->id = ($row[$startcol + 5] !== null) ? (int) $row[$startcol + 5] : null;
-			$this->created_at = ($row[$startcol + 6] !== null) ? (string) $row[$startcol + 6] : null;
-			$this->updated_at = ($row[$startcol + 7] !== null) ? (string) $row[$startcol + 7] : null;
+			$this->email = ($row[$startcol + 5] !== null) ? (string) $row[$startcol + 5] : null;
+			$this->key = ($row[$startcol + 6] !== null) ? (string) $row[$startcol + 6] : null;
+			$this->id = ($row[$startcol + 7] !== null) ? (int) $row[$startcol + 7] : null;
+			$this->created_at = ($row[$startcol + 8] !== null) ? (string) $row[$startcol + 8] : null;
+			$this->updated_at = ($row[$startcol + 9] !== null) ? (string) $row[$startcol + 9] : null;
 			$this->resetModified();
 
 			$this->setNew(false);
@@ -628,7 +702,7 @@ abstract class BaseEvent extends BaseObject  implements Persistent
 				$this->ensureConsistency();
 			}
 
-			return $startcol + 8; // 8 = EventPeer::NUM_COLUMNS - EventPeer::NUM_LAZY_LOAD_COLUMNS).
+			return $startcol + 10; // 10 = EventPeer::NUM_COLUMNS - EventPeer::NUM_LAZY_LOAD_COLUMNS).
 
 		} catch (Exception $e) {
 			throw new PropelException("Error populating Event object", $e);
@@ -954,12 +1028,18 @@ abstract class BaseEvent extends BaseObject  implements Persistent
 				return $this->getEnd();
 				break;
 			case 5:
-				return $this->getId();
+				return $this->getEmail();
 				break;
 			case 6:
-				return $this->getCreatedAt();
+				return $this->getKey();
 				break;
 			case 7:
+				return $this->getId();
+				break;
+			case 8:
+				return $this->getCreatedAt();
+				break;
+			case 9:
 				return $this->getUpdatedAt();
 				break;
 			default:
@@ -990,9 +1070,11 @@ abstract class BaseEvent extends BaseObject  implements Persistent
 			$keys[2] => $this->getIspublic(),
 			$keys[3] => $this->getStart(),
 			$keys[4] => $this->getEnd(),
-			$keys[5] => $this->getId(),
-			$keys[6] => $this->getCreatedAt(),
-			$keys[7] => $this->getUpdatedAt(),
+			$keys[5] => $this->getEmail(),
+			$keys[6] => $this->getKey(),
+			$keys[7] => $this->getId(),
+			$keys[8] => $this->getCreatedAt(),
+			$keys[9] => $this->getUpdatedAt(),
 		);
 		return $result;
 	}
@@ -1040,12 +1122,18 @@ abstract class BaseEvent extends BaseObject  implements Persistent
 				$this->setEnd($value);
 				break;
 			case 5:
-				$this->setId($value);
+				$this->setEmail($value);
 				break;
 			case 6:
-				$this->setCreatedAt($value);
+				$this->setKey($value);
 				break;
 			case 7:
+				$this->setId($value);
+				break;
+			case 8:
+				$this->setCreatedAt($value);
+				break;
+			case 9:
 				$this->setUpdatedAt($value);
 				break;
 		} // switch()
@@ -1077,9 +1165,11 @@ abstract class BaseEvent extends BaseObject  implements Persistent
 		if (array_key_exists($keys[2], $arr)) $this->setIspublic($arr[$keys[2]]);
 		if (array_key_exists($keys[3], $arr)) $this->setStart($arr[$keys[3]]);
 		if (array_key_exists($keys[4], $arr)) $this->setEnd($arr[$keys[4]]);
-		if (array_key_exists($keys[5], $arr)) $this->setId($arr[$keys[5]]);
-		if (array_key_exists($keys[6], $arr)) $this->setCreatedAt($arr[$keys[6]]);
-		if (array_key_exists($keys[7], $arr)) $this->setUpdatedAt($arr[$keys[7]]);
+		if (array_key_exists($keys[5], $arr)) $this->setEmail($arr[$keys[5]]);
+		if (array_key_exists($keys[6], $arr)) $this->setKey($arr[$keys[6]]);
+		if (array_key_exists($keys[7], $arr)) $this->setId($arr[$keys[7]]);
+		if (array_key_exists($keys[8], $arr)) $this->setCreatedAt($arr[$keys[8]]);
+		if (array_key_exists($keys[9], $arr)) $this->setUpdatedAt($arr[$keys[9]]);
 	}
 
 	/**
@@ -1096,6 +1186,8 @@ abstract class BaseEvent extends BaseObject  implements Persistent
 		if ($this->isColumnModified(EventPeer::ISPUBLIC)) $criteria->add(EventPeer::ISPUBLIC, $this->ispublic);
 		if ($this->isColumnModified(EventPeer::START)) $criteria->add(EventPeer::START, $this->start);
 		if ($this->isColumnModified(EventPeer::END)) $criteria->add(EventPeer::END, $this->end);
+		if ($this->isColumnModified(EventPeer::EMAIL)) $criteria->add(EventPeer::EMAIL, $this->email);
+		if ($this->isColumnModified(EventPeer::KEY)) $criteria->add(EventPeer::KEY, $this->key);
 		if ($this->isColumnModified(EventPeer::ID)) $criteria->add(EventPeer::ID, $this->id);
 		if ($this->isColumnModified(EventPeer::CREATED_AT)) $criteria->add(EventPeer::CREATED_AT, $this->created_at);
 		if ($this->isColumnModified(EventPeer::UPDATED_AT)) $criteria->add(EventPeer::UPDATED_AT, $this->updated_at);
@@ -1165,6 +1257,8 @@ abstract class BaseEvent extends BaseObject  implements Persistent
 		$copyObj->setIspublic($this->ispublic);
 		$copyObj->setStart($this->start);
 		$copyObj->setEnd($this->end);
+		$copyObj->setEmail($this->email);
+		$copyObj->setKey($this->key);
 		$copyObj->setCreatedAt($this->created_at);
 		$copyObj->setUpdatedAt($this->updated_at);
 
@@ -1220,6 +1314,8 @@ abstract class BaseEvent extends BaseObject  implements Persistent
 		$this->ispublic = null;
 		$this->start = null;
 		$this->end = null;
+		$this->email = null;
+		$this->key = null;
 		$this->id = null;
 		$this->created_at = null;
 		$this->updated_at = null;

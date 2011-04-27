@@ -1,9 +1,13 @@
+{if $result == 1}
+{$jaysawn}
+{else}
+<div id="errorbox"></div>
 <h2>Schedule Room</h2>
 
 <form action="/add" method="post" id="addform">
 
 <fieldset>
-    Your email address:<br>
+    Your email address (same as billing):<br>
     <input type="text" size="40" name="email" id="email">
     <span id="emailcheck"></span>
 </fieldset>
@@ -37,6 +41,7 @@
     </div>
 </fieldset>
 
-<input type="submit" value="Book your time">
+<input type="submit" value="Book your time" disabled="disabled">
 
 </form>
+{/if}

@@ -42,6 +42,8 @@ class EventTableMap extends TableMap {
 		$this->addColumn('ISPUBLIC', 'Ispublic', 'TINYINT', true, null, 0);
 		$this->addColumn('START', 'Start', 'TIMESTAMP', true, null, null);
 		$this->addColumn('END', 'End', 'TIMESTAMP', true, null, null);
+		$this->addColumn('EMAIL', 'Email', 'VARCHAR', true, 255, null);
+		$this->addColumn('KEY', 'Key', 'VARCHAR', true, 255, null);
 		$this->addPrimaryKey('ID', 'Id', 'INTEGER', true, null, null);
 		$this->addColumn('CREATED_AT', 'CreatedAt', 'TIMESTAMP', false, null, null);
 		$this->addColumn('UPDATED_AT', 'UpdatedAt', 'TIMESTAMP', false, null, null);

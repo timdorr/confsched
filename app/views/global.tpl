@@ -48,21 +48,42 @@ $('#beheader .add').click(function(e){
 });
 $('#beheader .add').click();
 
-$('#blackout').click(function(e){
+function closeAddBox(e) {
     $('#blackout').fadeOut('normal',function(){ $('#thatsawrap').css({ top: 0 }); });
     $('#addbox').fadeOut();
     e.preventDefault();
-});
+}
+
+$('#blackout').click(closeAddBox);
+$('#closebox').live('click', closeAddBox);
 
 $('#addform').live('submit',function(e){
+    $.post('/add', $('#addform').serialize(), function(data){
+        if(data.status == 0) {
+            $('#addbox').html(data.message);      
+        } else {
+            $('#errorbox').html(data.message).fadeIn();
+        }
+    },'json');
     e.preventDefault();
 });
 
-$('#email').live('change keypress',function(e){
+$('#email').live('change',function(e){
     if( $(this).val().length == 0 )
         $('#emailcheck').html('');
-    else
-        $('#emailcheck').html('<img src="/static/image/loading.gif"> Checking membership...');
+    else {
+        $('#emailcheck').attr('class','').html('<img src="/static/image/loading.gif"> Checking membership...');
+        $.post('/checkemail', { email: $(this).val() }, function(data){ 
+            $('#emailcheck').html(data.message);
+            if(data.status == 1) {
+                $('#emailcheck').attr('class','success');
+                $('#addform input[type=submit]').attr('disabled','');
+            } else {
+                $('#emailcheck').attr('class','error');
+                $('#addform input[type=submit]').attr('disabled','disabled');
+            }
+        }, 'json');
+    }
 });
 </script>
 

@@ -26,7 +26,7 @@ abstract class BaseEventPeer {
 	const TM_CLASS = 'EventTableMap';
 	
 	/** The total number of columns. */
-	const NUM_COLUMNS = 8;
+	const NUM_COLUMNS = 10;
 
 	/** The number of lazy-loaded columns. */
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -45,6 +45,12 @@ abstract class BaseEventPeer {
 
 	/** the column name for the END field */
 	const END = 'event.END';
+
+	/** the column name for the EMAIL field */
+	const EMAIL = 'event.EMAIL';
+
+	/** the column name for the KEY field */
+	const KEY = 'event.KEY';
 
 	/** the column name for the ID field */
 	const ID = 'event.ID';
@@ -71,12 +77,12 @@ abstract class BaseEventPeer {
 	 * e.g. self::$fieldNames[self::TYPE_PHPNAME][0] = 'Id'
 	 */
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Title', 'Description', 'Ispublic', 'Start', 'End', 'Id', 'CreatedAt', 'UpdatedAt', ),
-		BasePeer::TYPE_STUDLYPHPNAME => array ('title', 'description', 'ispublic', 'start', 'end', 'id', 'createdAt', 'updatedAt', ),
-		BasePeer::TYPE_COLNAME => array (self::TITLE, self::DESCRIPTION, self::ISPUBLIC, self::START, self::END, self::ID, self::CREATED_AT, self::UPDATED_AT, ),
-		BasePeer::TYPE_RAW_COLNAME => array ('TITLE', 'DESCRIPTION', 'ISPUBLIC', 'START', 'END', 'ID', 'CREATED_AT', 'UPDATED_AT', ),
-		BasePeer::TYPE_FIELDNAME => array ('title', 'description', 'ispublic', 'start', 'end', 'id', 'created_at', 'updated_at', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, )
+		BasePeer::TYPE_PHPNAME => array ('Title', 'Description', 'Ispublic', 'Start', 'End', 'Email', 'Key', 'Id', 'CreatedAt', 'UpdatedAt', ),
+		BasePeer::TYPE_STUDLYPHPNAME => array ('title', 'description', 'ispublic', 'start', 'end', 'email', 'key', 'id', 'createdAt', 'updatedAt', ),
+		BasePeer::TYPE_COLNAME => array (self::TITLE, self::DESCRIPTION, self::ISPUBLIC, self::START, self::END, self::EMAIL, self::KEY, self::ID, self::CREATED_AT, self::UPDATED_AT, ),
+		BasePeer::TYPE_RAW_COLNAME => array ('TITLE', 'DESCRIPTION', 'ISPUBLIC', 'START', 'END', 'EMAIL', 'KEY', 'ID', 'CREATED_AT', 'UPDATED_AT', ),
+		BasePeer::TYPE_FIELDNAME => array ('title', 'description', 'ispublic', 'start', 'end', 'email', 'key', 'id', 'created_at', 'updated_at', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, )
 	);
 
 	/**
@@ -86,12 +92,12 @@ abstract class BaseEventPeer {
 	 * e.g. self::$fieldNames[BasePeer::TYPE_PHPNAME]['Id'] = 0
 	 */
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Title' => 0, 'Description' => 1, 'Ispublic' => 2, 'Start' => 3, 'End' => 4, 'Id' => 5, 'CreatedAt' => 6, 'UpdatedAt' => 7, ),
-		BasePeer::TYPE_STUDLYPHPNAME => array ('title' => 0, 'description' => 1, 'ispublic' => 2, 'start' => 3, 'end' => 4, 'id' => 5, 'createdAt' => 6, 'updatedAt' => 7, ),
-		BasePeer::TYPE_COLNAME => array (self::TITLE => 0, self::DESCRIPTION => 1, self::ISPUBLIC => 2, self::START => 3, self::END => 4, self::ID => 5, self::CREATED_AT => 6, self::UPDATED_AT => 7, ),
-		BasePeer::TYPE_RAW_COLNAME => array ('TITLE' => 0, 'DESCRIPTION' => 1, 'ISPUBLIC' => 2, 'START' => 3, 'END' => 4, 'ID' => 5, 'CREATED_AT' => 6, 'UPDATED_AT' => 7, ),
-		BasePeer::TYPE_FIELDNAME => array ('title' => 0, 'description' => 1, 'ispublic' => 2, 'start' => 3, 'end' => 4, 'id' => 5, 'created_at' => 6, 'updated_at' => 7, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, )
+		BasePeer::TYPE_PHPNAME => array ('Title' => 0, 'Description' => 1, 'Ispublic' => 2, 'Start' => 3, 'End' => 4, 'Email' => 5, 'Key' => 6, 'Id' => 7, 'CreatedAt' => 8, 'UpdatedAt' => 9, ),
+		BasePeer::TYPE_STUDLYPHPNAME => array ('title' => 0, 'description' => 1, 'ispublic' => 2, 'start' => 3, 'end' => 4, 'email' => 5, 'key' => 6, 'id' => 7, 'createdAt' => 8, 'updatedAt' => 9, ),
+		BasePeer::TYPE_COLNAME => array (self::TITLE => 0, self::DESCRIPTION => 1, self::ISPUBLIC => 2, self::START => 3, self::END => 4, self::EMAIL => 5, self::KEY => 6, self::ID => 7, self::CREATED_AT => 8, self::UPDATED_AT => 9, ),
+		BasePeer::TYPE_RAW_COLNAME => array ('TITLE' => 0, 'DESCRIPTION' => 1, 'ISPUBLIC' => 2, 'START' => 3, 'END' => 4, 'EMAIL' => 5, 'KEY' => 6, 'ID' => 7, 'CREATED_AT' => 8, 'UPDATED_AT' => 9, ),
+		BasePeer::TYPE_FIELDNAME => array ('title' => 0, 'description' => 1, 'ispublic' => 2, 'start' => 3, 'end' => 4, 'email' => 5, 'key' => 6, 'id' => 7, 'created_at' => 8, 'updated_at' => 9, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, )
 	);
 
 	/**
@@ -168,6 +174,8 @@ abstract class BaseEventPeer {
 			$criteria->addSelectColumn(EventPeer::ISPUBLIC);
 			$criteria->addSelectColumn(EventPeer::START);
 			$criteria->addSelectColumn(EventPeer::END);
+			$criteria->addSelectColumn(EventPeer::EMAIL);
+			$criteria->addSelectColumn(EventPeer::KEY);
 			$criteria->addSelectColumn(EventPeer::ID);
 			$criteria->addSelectColumn(EventPeer::CREATED_AT);
 			$criteria->addSelectColumn(EventPeer::UPDATED_AT);
@@ -177,6 +185,8 @@ abstract class BaseEventPeer {
 			$criteria->addSelectColumn($alias . '.ISPUBLIC');
 			$criteria->addSelectColumn($alias . '.START');
 			$criteria->addSelectColumn($alias . '.END');
+			$criteria->addSelectColumn($alias . '.EMAIL');
+			$criteria->addSelectColumn($alias . '.KEY');
 			$criteria->addSelectColumn($alias . '.ID');
 			$criteria->addSelectColumn($alias . '.CREATED_AT');
 			$criteria->addSelectColumn($alias . '.UPDATED_AT');
@@ -388,10 +398,10 @@ abstract class BaseEventPeer {
 	public static function getPrimaryKeyHashFromRow($row, $startcol = 0)
 	{
 		// If the PK cannot be derived from the row, return NULL.
-		if ($row[$startcol + 5] === null) {
+		if ($row[$startcol + 7] === null) {
 			return null;
 		}
-		return (string) $row[$startcol + 5];
+		return (string) $row[$startcol + 7];
 	}
 
 	/**
@@ -405,7 +415,7 @@ abstract class BaseEventPeer {
 	 */
 	public static function getPrimaryKeyFromRow($row, $startcol = 0)
 	{
-		return (int) $row[$startcol + 5];
+		return (int) $row[$startcol + 7];
 	}
 	
 	/**
