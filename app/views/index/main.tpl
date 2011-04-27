@@ -32,12 +32,17 @@
     </div>
     
     <div id="agenda">
+        {$prevstart=0}
         {foreach from=$agenda item=event}
-        <div class="event">
-            <h3>{$event->getTitle()}</h3>
+        {if $prevstart < time() && $event->getStart('U') > time()}
+        <div class="nowhr"><span>Right Now</span></div>
+        {/if}
+        <div class="event{if $event->getStart('U') < time()} old{/if}">
+            <h3{if $event->getIspublic() == 0} class="private"{/if}>{$event->getTitle()}</h3>
             <h6>{$event->getStart('F j g:i a')} - {$event->getEnd('g:i a')}</h6>
-            {if $event->getDescription()}<p>{$event->getDescription()}</p>{/if}
+            {if $event->getDescription() && $event->getIspublic() == 1}<p>{$event->getDescription()}</p>{/if}
         </div>
+        {$prevstart=$event->getStart('U')}
         {/foreach}
     </div>
     

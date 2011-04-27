@@ -8,7 +8,7 @@
  *
  * @method     EventQuery orderByTitle($order = Criteria::ASC) Order by the title column
  * @method     EventQuery orderByDescription($order = Criteria::ASC) Order by the description column
- * @method     EventQuery orderByHidetitle($order = Criteria::ASC) Order by the hidetitle column
+ * @method     EventQuery orderByIspublic($order = Criteria::ASC) Order by the ispublic column
  * @method     EventQuery orderByStart($order = Criteria::ASC) Order by the start column
  * @method     EventQuery orderByEnd($order = Criteria::ASC) Order by the end column
  * @method     EventQuery orderById($order = Criteria::ASC) Order by the id column
@@ -17,7 +17,7 @@
  *
  * @method     EventQuery groupByTitle() Group by the title column
  * @method     EventQuery groupByDescription() Group by the description column
- * @method     EventQuery groupByHidetitle() Group by the hidetitle column
+ * @method     EventQuery groupByIspublic() Group by the ispublic column
  * @method     EventQuery groupByStart() Group by the start column
  * @method     EventQuery groupByEnd() Group by the end column
  * @method     EventQuery groupById() Group by the id column
@@ -33,7 +33,7 @@
  *
  * @method     Event findOneByTitle(string $title) Return the first Event filtered by the title column
  * @method     Event findOneByDescription(string $description) Return the first Event filtered by the description column
- * @method     Event findOneByHidetitle(int $hidetitle) Return the first Event filtered by the hidetitle column
+ * @method     Event findOneByIspublic(int $ispublic) Return the first Event filtered by the ispublic column
  * @method     Event findOneByStart(string $start) Return the first Event filtered by the start column
  * @method     Event findOneByEnd(string $end) Return the first Event filtered by the end column
  * @method     Event findOneById(int $id) Return the first Event filtered by the id column
@@ -42,7 +42,7 @@
  *
  * @method     array findByTitle(string $title) Return Event objects filtered by the title column
  * @method     array findByDescription(string $description) Return Event objects filtered by the description column
- * @method     array findByHidetitle(int $hidetitle) Return Event objects filtered by the hidetitle column
+ * @method     array findByIspublic(int $ispublic) Return Event objects filtered by the ispublic column
  * @method     array findByStart(string $start) Return Event objects filtered by the start column
  * @method     array findByEnd(string $end) Return Event objects filtered by the end column
  * @method     array findById(int $id) Return Event objects filtered by the id column
@@ -202,24 +202,24 @@ abstract class BaseEventQuery extends ModelCriteria
 	}
 
 	/**
-	 * Filter the query on the hidetitle column
+	 * Filter the query on the ispublic column
 	 * 
-	 * @param     int|array $hidetitle The value to use as filter.
+	 * @param     int|array $ispublic The value to use as filter.
 	 *            Accepts an associative array('min' => $minValue, 'max' => $maxValue)
 	 * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
 	 *
 	 * @return    EventQuery The current query, for fluid interface
 	 */
-	public function filterByHidetitle($hidetitle = null, $comparison = null)
+	public function filterByIspublic($ispublic = null, $comparison = null)
 	{
-		if (is_array($hidetitle)) {
+		if (is_array($ispublic)) {
 			$useMinMax = false;
-			if (isset($hidetitle['min'])) {
-				$this->addUsingAlias(EventPeer::HIDETITLE, $hidetitle['min'], Criteria::GREATER_EQUAL);
+			if (isset($ispublic['min'])) {
+				$this->addUsingAlias(EventPeer::ISPUBLIC, $ispublic['min'], Criteria::GREATER_EQUAL);
 				$useMinMax = true;
 			}
-			if (isset($hidetitle['max'])) {
-				$this->addUsingAlias(EventPeer::HIDETITLE, $hidetitle['max'], Criteria::LESS_EQUAL);
+			if (isset($ispublic['max'])) {
+				$this->addUsingAlias(EventPeer::ISPUBLIC, $ispublic['max'], Criteria::LESS_EQUAL);
 				$useMinMax = true;
 			}
 			if ($useMinMax) {
@@ -229,7 +229,7 @@ abstract class BaseEventQuery extends ModelCriteria
 				$comparison = Criteria::IN;
 			}
 		}
-		return $this->addUsingAlias(EventPeer::HIDETITLE, $hidetitle, $comparison);
+		return $this->addUsingAlias(EventPeer::ISPUBLIC, $ispublic, $comparison);
 	}
 
 	/**

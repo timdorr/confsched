@@ -37,11 +37,11 @@ abstract class BaseEvent extends BaseObject  implements Persistent
 	protected $description;
 
 	/**
-	 * The value for the hidetitle field.
+	 * The value for the ispublic field.
 	 * Note: this column has a database default value of: 0
 	 * @var        int
 	 */
-	protected $hidetitle;
+	protected $ispublic;
 
 	/**
 	 * The value for the start field.
@@ -95,7 +95,7 @@ abstract class BaseEvent extends BaseObject  implements Persistent
 	 */
 	public function applyDefaultValues()
 	{
-		$this->hidetitle = 0;
+		$this->ispublic = 0;
 	}
 
 	/**
@@ -129,13 +129,13 @@ abstract class BaseEvent extends BaseObject  implements Persistent
 	}
 
 	/**
-	 * Get the [hidetitle] column value.
+	 * Get the [ispublic] column value.
 	 * 
 	 * @return     int
 	 */
-	public function getHidetitle()
+	public function getIspublic()
 	{
-		return $this->hidetitle;
+		return $this->ispublic;
 	}
 
 	/**
@@ -341,24 +341,24 @@ abstract class BaseEvent extends BaseObject  implements Persistent
 	} // setDescription()
 
 	/**
-	 * Set the value of [hidetitle] column.
+	 * Set the value of [ispublic] column.
 	 * 
 	 * @param      int $v new value
 	 * @return     Event The current object (for fluent API support)
 	 */
-	public function setHidetitle($v)
+	public function setIspublic($v)
 	{
 		if ($v !== null) {
 			$v = (int) $v;
 		}
 
-		if ($this->hidetitle !== $v || $this->isNew()) {
-			$this->hidetitle = $v;
-			$this->modifiedColumns[] = EventPeer::HIDETITLE;
+		if ($this->ispublic !== $v || $this->isNew()) {
+			$this->ispublic = $v;
+			$this->modifiedColumns[] = EventPeer::ISPUBLIC;
 		}
 
 		return $this;
-	} // setHidetitle()
+	} // setIspublic()
 
 	/**
 	 * Sets the value of [start] column to a normalized version of the date/time value specified.
@@ -586,7 +586,7 @@ abstract class BaseEvent extends BaseObject  implements Persistent
 	 */
 	public function hasOnlyDefaultValues()
 	{
-			if ($this->hidetitle !== 0) {
+			if ($this->ispublic !== 0) {
 				return false;
 			}
 
@@ -614,7 +614,7 @@ abstract class BaseEvent extends BaseObject  implements Persistent
 
 			$this->title = ($row[$startcol + 0] !== null) ? (string) $row[$startcol + 0] : null;
 			$this->description = ($row[$startcol + 1] !== null) ? (string) $row[$startcol + 1] : null;
-			$this->hidetitle = ($row[$startcol + 2] !== null) ? (int) $row[$startcol + 2] : null;
+			$this->ispublic = ($row[$startcol + 2] !== null) ? (int) $row[$startcol + 2] : null;
 			$this->start = ($row[$startcol + 3] !== null) ? (string) $row[$startcol + 3] : null;
 			$this->end = ($row[$startcol + 4] !== null) ? (string) $row[$startcol + 4] : null;
 			$this->id = ($row[$startcol + 5] !== null) ? (int) $row[$startcol + 5] : null;
@@ -945,7 +945,7 @@ abstract class BaseEvent extends BaseObject  implements Persistent
 				return $this->getDescription();
 				break;
 			case 2:
-				return $this->getHidetitle();
+				return $this->getIspublic();
 				break;
 			case 3:
 				return $this->getStart();
@@ -987,7 +987,7 @@ abstract class BaseEvent extends BaseObject  implements Persistent
 		$result = array(
 			$keys[0] => $this->getTitle(),
 			$keys[1] => $this->getDescription(),
-			$keys[2] => $this->getHidetitle(),
+			$keys[2] => $this->getIspublic(),
 			$keys[3] => $this->getStart(),
 			$keys[4] => $this->getEnd(),
 			$keys[5] => $this->getId(),
@@ -1031,7 +1031,7 @@ abstract class BaseEvent extends BaseObject  implements Persistent
 				$this->setDescription($value);
 				break;
 			case 2:
-				$this->setHidetitle($value);
+				$this->setIspublic($value);
 				break;
 			case 3:
 				$this->setStart($value);
@@ -1074,7 +1074,7 @@ abstract class BaseEvent extends BaseObject  implements Persistent
 
 		if (array_key_exists($keys[0], $arr)) $this->setTitle($arr[$keys[0]]);
 		if (array_key_exists($keys[1], $arr)) $this->setDescription($arr[$keys[1]]);
-		if (array_key_exists($keys[2], $arr)) $this->setHidetitle($arr[$keys[2]]);
+		if (array_key_exists($keys[2], $arr)) $this->setIspublic($arr[$keys[2]]);
 		if (array_key_exists($keys[3], $arr)) $this->setStart($arr[$keys[3]]);
 		if (array_key_exists($keys[4], $arr)) $this->setEnd($arr[$keys[4]]);
 		if (array_key_exists($keys[5], $arr)) $this->setId($arr[$keys[5]]);
@@ -1093,7 +1093,7 @@ abstract class BaseEvent extends BaseObject  implements Persistent
 
 		if ($this->isColumnModified(EventPeer::TITLE)) $criteria->add(EventPeer::TITLE, $this->title);
 		if ($this->isColumnModified(EventPeer::DESCRIPTION)) $criteria->add(EventPeer::DESCRIPTION, $this->description);
-		if ($this->isColumnModified(EventPeer::HIDETITLE)) $criteria->add(EventPeer::HIDETITLE, $this->hidetitle);
+		if ($this->isColumnModified(EventPeer::ISPUBLIC)) $criteria->add(EventPeer::ISPUBLIC, $this->ispublic);
 		if ($this->isColumnModified(EventPeer::START)) $criteria->add(EventPeer::START, $this->start);
 		if ($this->isColumnModified(EventPeer::END)) $criteria->add(EventPeer::END, $this->end);
 		if ($this->isColumnModified(EventPeer::ID)) $criteria->add(EventPeer::ID, $this->id);
@@ -1162,7 +1162,7 @@ abstract class BaseEvent extends BaseObject  implements Persistent
 	{
 		$copyObj->setTitle($this->title);
 		$copyObj->setDescription($this->description);
-		$copyObj->setHidetitle($this->hidetitle);
+		$copyObj->setIspublic($this->ispublic);
 		$copyObj->setStart($this->start);
 		$copyObj->setEnd($this->end);
 		$copyObj->setCreatedAt($this->created_at);
@@ -1217,7 +1217,7 @@ abstract class BaseEvent extends BaseObject  implements Persistent
 	{
 		$this->title = null;
 		$this->description = null;
-		$this->hidetitle = null;
+		$this->ispublic = null;
 		$this->start = null;
 		$this->end = null;
 		$this->id = null;

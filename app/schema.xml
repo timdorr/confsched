@@ -9,7 +9,7 @@
     <table name="event">
         <column name="title" type="varchar" required="true" />
         <column name="description" type="longvarchar" required="true" />
-        <column name="hidetitle" type="tinyint" defaultValue="0" required="true" />
+        <column name="ispublic" type="tinyint" defaultValue="0" required="true" />
         <column name="start" type="timestamp" required="true" />
         <column name="end" type="timestamp" required="true" />
         <behavior name="auto_add_pk" />

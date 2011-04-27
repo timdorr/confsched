@@ -3,6 +3,11 @@ body {
     font-family: ProximaNova, Verdana, Arial, sans-serif;
 }
 
+input, textarea {
+    font-size: 13px;
+    font-family: ProximaNova, Verdana, Arial, sans-serif;
+}
+
 a {
     color: #135a88;
     text-decoration: none;
@@ -110,13 +115,13 @@ a {
         }
         
             .calendar .title {
-                font-size: 14px;
+                font-size: 18px;
                 font-style: italic;
                 text-align: center;
             }
             
             .calendar table {
-                margin: 0 auto;
+                margin: 5px auto;
                 border-collapse: separate;
                 border-spacing: 5px;
             }
@@ -180,6 +185,11 @@ a {
                     font-weight: bold;
                 }
                 
+                    .event h3.private {
+                        font-weight: normal;
+                        font-style: italic;
+                    }
+                
                 .event h6 {
                     color: #666;
                     font-size: 13px;
@@ -188,6 +198,31 @@ a {
                 
                 .event p {
                     margin-top: 10px;
+                }
+        
+            .event.old {
+                background: #fbfbfb;
+                color: #aaa;
+                border: 1px solid #eee;
+            }
+            
+                .event.old h6 {
+                    color: #ccc;
+                }
+        
+            .nowhr {
+                height: 10px;
+                margin-bottom: 20px;
+                color: #666;
+                font-style: italic;
+                border-bottom: 1px dotted #666;
+            }
+            
+                .nowhr span {
+                    margin-left: 20px;
+                    padding: 0 5px;
+                    background: #fff;
+                    font-size: 14px;
                 }
                 
 #blackout {
@@ -221,3 +256,35 @@ a {
     -moz-box-shadow: 0px 10px 20px rgba(0,0,0,0.5);
     box-shadow: 0px 10px 20px rgba(0,0,0,0.5); 
 }
+
+    #addbox h2 {
+        font-size: 20px;
+        font-weight: bold;
+    }
+    
+    #addbox fieldset {
+        margin: 10px 0;
+        padding: 10px;
+        background: #f3f7f8;
+        border: 1px solid #b2c3ca;
+    }
+    
+    #addbox input[type=text], textarea {
+        margin: 5px 0;
+        padding: 5px;
+        border: 1px solid #999;
+        resize: none;
+    }
+    
+    #addbox #emailcheck {
+        padding-left: 10px;
+        font-size: 14px;
+    }
+    
+    #addbox .checkbox {
+        margin: 5px 0 10px;
+    }
+    
+        #addbox .checkbox input {
+            margin: 0 5px 0 0;
+        }

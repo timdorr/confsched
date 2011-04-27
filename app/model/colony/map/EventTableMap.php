@@ -39,7 +39,7 @@ class EventTableMap extends TableMap {
 		// columns
 		$this->addColumn('TITLE', 'Title', 'VARCHAR', true, 255, null);
 		$this->addColumn('DESCRIPTION', 'Description', 'LONGVARCHAR', true, null, null);
-		$this->addColumn('HIDETITLE', 'Hidetitle', 'TINYINT', true, null, 0);
+		$this->addColumn('ISPUBLIC', 'Ispublic', 'TINYINT', true, null, 0);
 		$this->addColumn('START', 'Start', 'TIMESTAMP', true, null, null);
 		$this->addColumn('END', 'End', 'TIMESTAMP', true, null, null);
 		$this->addPrimaryKey('ID', 'Id', 'INTEGER', true, null, null);

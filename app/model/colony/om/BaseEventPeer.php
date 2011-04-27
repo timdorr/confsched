@@ -37,8 +37,8 @@ abstract class BaseEventPeer {
 	/** the column name for the DESCRIPTION field */
 	const DESCRIPTION = 'event.DESCRIPTION';
 
-	/** the column name for the HIDETITLE field */
-	const HIDETITLE = 'event.HIDETITLE';
+	/** the column name for the ISPUBLIC field */
+	const ISPUBLIC = 'event.ISPUBLIC';
 
 	/** the column name for the START field */
 	const START = 'event.START';
@@ -71,11 +71,11 @@ abstract class BaseEventPeer {
 	 * e.g. self::$fieldNames[self::TYPE_PHPNAME][0] = 'Id'
 	 */
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Title', 'Description', 'Hidetitle', 'Start', 'End', 'Id', 'CreatedAt', 'UpdatedAt', ),
-		BasePeer::TYPE_STUDLYPHPNAME => array ('title', 'description', 'hidetitle', 'start', 'end', 'id', 'createdAt', 'updatedAt', ),
-		BasePeer::TYPE_COLNAME => array (self::TITLE, self::DESCRIPTION, self::HIDETITLE, self::START, self::END, self::ID, self::CREATED_AT, self::UPDATED_AT, ),
-		BasePeer::TYPE_RAW_COLNAME => array ('TITLE', 'DESCRIPTION', 'HIDETITLE', 'START', 'END', 'ID', 'CREATED_AT', 'UPDATED_AT', ),
-		BasePeer::TYPE_FIELDNAME => array ('title', 'description', 'hidetitle', 'start', 'end', 'id', 'created_at', 'updated_at', ),
+		BasePeer::TYPE_PHPNAME => array ('Title', 'Description', 'Ispublic', 'Start', 'End', 'Id', 'CreatedAt', 'UpdatedAt', ),
+		BasePeer::TYPE_STUDLYPHPNAME => array ('title', 'description', 'ispublic', 'start', 'end', 'id', 'createdAt', 'updatedAt', ),
+		BasePeer::TYPE_COLNAME => array (self::TITLE, self::DESCRIPTION, self::ISPUBLIC, self::START, self::END, self::ID, self::CREATED_AT, self::UPDATED_AT, ),
+		BasePeer::TYPE_RAW_COLNAME => array ('TITLE', 'DESCRIPTION', 'ISPUBLIC', 'START', 'END', 'ID', 'CREATED_AT', 'UPDATED_AT', ),
+		BasePeer::TYPE_FIELDNAME => array ('title', 'description', 'ispublic', 'start', 'end', 'id', 'created_at', 'updated_at', ),
 		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, )
 	);
 
@@ -86,11 +86,11 @@ abstract class BaseEventPeer {
 	 * e.g. self::$fieldNames[BasePeer::TYPE_PHPNAME]['Id'] = 0
 	 */
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Title' => 0, 'Description' => 1, 'Hidetitle' => 2, 'Start' => 3, 'End' => 4, 'Id' => 5, 'CreatedAt' => 6, 'UpdatedAt' => 7, ),
-		BasePeer::TYPE_STUDLYPHPNAME => array ('title' => 0, 'description' => 1, 'hidetitle' => 2, 'start' => 3, 'end' => 4, 'id' => 5, 'createdAt' => 6, 'updatedAt' => 7, ),
-		BasePeer::TYPE_COLNAME => array (self::TITLE => 0, self::DESCRIPTION => 1, self::HIDETITLE => 2, self::START => 3, self::END => 4, self::ID => 5, self::CREATED_AT => 6, self::UPDATED_AT => 7, ),
-		BasePeer::TYPE_RAW_COLNAME => array ('TITLE' => 0, 'DESCRIPTION' => 1, 'HIDETITLE' => 2, 'START' => 3, 'END' => 4, 'ID' => 5, 'CREATED_AT' => 6, 'UPDATED_AT' => 7, ),
-		BasePeer::TYPE_FIELDNAME => array ('title' => 0, 'description' => 1, 'hidetitle' => 2, 'start' => 3, 'end' => 4, 'id' => 5, 'created_at' => 6, 'updated_at' => 7, ),
+		BasePeer::TYPE_PHPNAME => array ('Title' => 0, 'Description' => 1, 'Ispublic' => 2, 'Start' => 3, 'End' => 4, 'Id' => 5, 'CreatedAt' => 6, 'UpdatedAt' => 7, ),
+		BasePeer::TYPE_STUDLYPHPNAME => array ('title' => 0, 'description' => 1, 'ispublic' => 2, 'start' => 3, 'end' => 4, 'id' => 5, 'createdAt' => 6, 'updatedAt' => 7, ),
+		BasePeer::TYPE_COLNAME => array (self::TITLE => 0, self::DESCRIPTION => 1, self::ISPUBLIC => 2, self::START => 3, self::END => 4, self::ID => 5, self::CREATED_AT => 6, self::UPDATED_AT => 7, ),
+		BasePeer::TYPE_RAW_COLNAME => array ('TITLE' => 0, 'DESCRIPTION' => 1, 'ISPUBLIC' => 2, 'START' => 3, 'END' => 4, 'ID' => 5, 'CREATED_AT' => 6, 'UPDATED_AT' => 7, ),
+		BasePeer::TYPE_FIELDNAME => array ('title' => 0, 'description' => 1, 'ispublic' => 2, 'start' => 3, 'end' => 4, 'id' => 5, 'created_at' => 6, 'updated_at' => 7, ),
 		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, )
 	);
 
@@ -165,7 +165,7 @@ abstract class BaseEventPeer {
 		if (null === $alias) {
 			$criteria->addSelectColumn(EventPeer::TITLE);
 			$criteria->addSelectColumn(EventPeer::DESCRIPTION);
-			$criteria->addSelectColumn(EventPeer::HIDETITLE);
+			$criteria->addSelectColumn(EventPeer::ISPUBLIC);
 			$criteria->addSelectColumn(EventPeer::START);
 			$criteria->addSelectColumn(EventPeer::END);
 			$criteria->addSelectColumn(EventPeer::ID);
@@ -174,7 +174,7 @@ abstract class BaseEventPeer {
 		} else {
 			$criteria->addSelectColumn($alias . '.TITLE');
 			$criteria->addSelectColumn($alias . '.DESCRIPTION');
-			$criteria->addSelectColumn($alias . '.HIDETITLE');
+			$criteria->addSelectColumn($alias . '.ISPUBLIC');
 			$criteria->addSelectColumn($alias . '.START');
 			$criteria->addSelectColumn($alias . '.END');
 			$criteria->addSelectColumn($alias . '.ID');

@@ -15,4 +15,11 @@
  */
 class Event extends BaseEvent {
 
+    public function getTitle() {
+        if( $this->getIspublic() == 1 )
+            return parent::getTitle();
+        else
+            return "Reserved";
+    }
+
 } // Event

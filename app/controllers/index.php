@@ -10,6 +10,7 @@ class Index_Controller extends App_Controller
         // Get some data from the database for agenda
         $this->agenda = EventQuery::create()
                         ->filterByStart( strtotime('-14 days') , Criteria::GREATER_THAN )
+                        ->orderByStart()
                         ->find();
         
         // Prep the input and time
@@ -58,6 +59,10 @@ class Index_Controller extends App_Controller
 
     public function add() {
         $this->noglobal = true;
+    }
+
+    public function checkemail() {
+        $this->noglobal = true;    
     }
 
 }
