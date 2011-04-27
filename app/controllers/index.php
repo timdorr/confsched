@@ -98,6 +98,25 @@ class Index_Controller extends App_Controller
             // Can't be in the past.
             if( $start < time() )
                 $errors[] = "The event can't be in the past";
+
+            // Check for overlapping events                
+            $start_overlap = EventQuery::create()
+                        ->filterByStart( $start, Criteria::LESS_EQUAL )
+                        ->filterByEnd( $start, Criteria::GREATER_THAN )
+                        ->filterByKey( '' )
+                        ->find();
+            $end_overlap = EventQuery::create()
+                        ->filterByStart( $end, Criteria::LESS_THAN )
+                        ->filterByEnd( $end, Criteria::GREATER_EQUAL )
+                        ->filterByKey( '' )
+                        ->find();
+            $mid_overlap = EventQuery::create()
+                        ->filterByStart( $start, Criteria::GREATER_EQUAL )
+                        ->filterByEnd( $end, Criteria::LESS_EQUAL )
+                        ->filterByKey( '' )
+                        ->find();
+            if( count($start_overlap) + count($end_overlap) + count($mid_overlap) > 0 )
+                $errors[] = "The room is already reserved at that time";
             
             // If there are no errors, success!
             if( count( $errors ) == 0 ) {
@@ -115,6 +134,19 @@ class Index_Controller extends App_Controller
                 $event->setKey( sha1( time() + rand() ) );
             
                 $event->save();
+                
+                mail( $this->input['email'],
+                      "Ignition Alley :: Confirm Your Event",
+"Hi There,
+
+We've gotten your request to reserve the Ignition Alley conference room. In order to confirm your time, please click the link below:
+
+http://".$_SERVER["HTTP_HOST"]."/confirm?key=".$event->getKey()."
+
+If you've gotten this message in error, please let us know. Thanks and enjoy your time in the conference room!
+
+-The Ignition Alley Crew",
+                      "From: Ignition Alley <info@ignitionalley.com>\r\n" );
             
                 // Prepare the response
                 $this->jaysawn = json_encode( array( 'message' => '<h2>Thanks for adding your event!</h2><p>You will get an email with a link to activate the listing. Please be sure to click that link or your event will not show up and your time will not be reserved!</p><input type="submit" id="closebox" value="Back to the calendar">', status => 0 ) );
