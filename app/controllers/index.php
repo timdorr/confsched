@@ -162,6 +162,10 @@ class Index_Controller extends App_Controller
     }
 
 
+    /******************
+     * Freshbooks API *
+     ******************/
+
     private function fb_request( $method, $data = array() ) {
         $fb_url = 'https://ignitionalley.freshbooks.com/api/2.1/xml-in';
         $fb_tok = '2a16ae2359fba460612fbe22bb8e8166';
