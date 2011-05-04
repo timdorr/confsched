@@ -165,6 +165,13 @@ If you've gotten this message in error, please let us know. Thanks and enjoy you
     public function checkemail() {
         $this->noglobal = true; 
         
+        // Check our excepted emails
+        $allowed = array( 'timdorr@timdorr.com', 'todd@wwcompany.com', 'geoffreydgraham@gmail.com' );
+        if( in_array( $this->input['email'], $allowed ) ) {
+            $this->jaysawn = json_encode( array( 'message' => "<img src='/static/image/success.png'> You're a member! Yay!", 'status' => 1 ) );
+            return;
+        }
+        
         // First, find them in the active client list
         $client = $this->fb_request( 'client.list', array( 'email' => $this->input['email'] ) );
         if( $client && $client->clients->client ) {
