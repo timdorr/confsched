@@ -167,7 +167,7 @@ If you've gotten this message in error, please let us know. Thanks and enjoy you
         
         // Check our excepted emails
         $allowed = array( 'timdorr@timdorr.com', 'todd@wwcompany.com', 'geoffreydgraham@gmail.com' );
-        if( in_array( $this->input['email'], $allowed ) ) {
+        if( in_array( strtolower( $this->input['email'] ), array_map( 'strtolower', $allowed ) ) ) {
             $this->jaysawn = json_encode( array( 'message' => "<img src='/static/image/success.png'> You're a member! Yay!", 'status' => 1 ) );
             return;
         }
