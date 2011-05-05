@@ -4,6 +4,8 @@
 <head>
 
     <meta charset="utf-8">
+    <meta name="viewport" content="width=1000, user-scalable=no" />
+    
     <title>{if $page_title}{$page_title} | {/if}IA Conference Room Scheduler</title>
 
     <link rel="stylesheet" href="/static/style/reset.css">
