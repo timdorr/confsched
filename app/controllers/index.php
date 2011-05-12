@@ -177,9 +177,15 @@ If you've gotten this message in error, please let us know. Thanks and enjoy you
         if( $client && $client->clients->client ) {
             // Next, find if they've got an active membership
             $profile = $this->fb_request( 'recurring.list', array( 'client_id' => $client->clients->client->client_id ) );
-            if( $profile && $profile->recurrings->recurring && $profile->recurrings->recurring->stopped == 0 )
-                $this->jaysawn = json_encode( array( 'message' => "<img src='/static/image/success.png'> You're a member! Yay!", 'status' => 1 ) );
-            else
+            if( $profile && $profile->recurrings->recurring && $profile->recurrings->recurring->stopped == 0 ) {
+                $confroom = false;
+                foreach( $profile->recurrings->recurring->lines->line as $line )
+                    $confroom = $confroom || ( $line->name == "Conference Room" );
+                if( $confroom )
+                    $this->jaysawn = json_encode( array( 'message' => "<img src='/static/image/success.png'> You're a member and have access! Yay!", 'status' => 1 ) );
+                else
+                    $this->jaysawn = json_encode( array( 'message' => '<img src="/static/image/error.png"> You don\'t have conference room access. <a href="mailto:info@ignitionalley.com ">Email us</a> to add it!', 'status' => 0 ) );
+            } else
                 $this->jaysawn = json_encode( array( 'message' => '<img src="/static/image/error.png"> You are not an active member', 'status' => 0 ) );
         } else
             $this->jaysawn = json_encode( array( 'message' => '<img src="/static/image/error.png"> Email address not found', 'status' => 0 ) );
